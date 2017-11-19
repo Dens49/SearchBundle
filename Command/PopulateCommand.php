@@ -70,6 +70,7 @@ class PopulateCommand extends BaseCommand
         // Initialize command
         parent::execute($input, $output);
         $this->em = $this->getDoctrine()->getManager();
+        $this->indexManager->setEm($this->em);
         $this->indexManager = $this->get('whatwedo_search.manager.index');
         $entities = $this->indexManager->getIndexedEntities();
 

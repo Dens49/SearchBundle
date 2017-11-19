@@ -30,6 +30,7 @@ namespace whatwedo\SearchBundle\Manager;
 use Doctrine\Common\Annotations\AnnotationReader;
 use Doctrine\Common\Persistence\Mapping\ClassMetadata;
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Query\ResultSetMapping;
 use whatwedo\SearchBundle\Annotation\Index;
 use whatwedo\SearchBundle\Exception\IdMethodNotFound;
@@ -51,15 +52,6 @@ class IndexManager
      * @var array
      */
     protected $config = [];
-
-    /**
-     * IndexManager constructor.
-     * @param EntityManager $em
-     */
-    public function __construct(EntityManager $em)
-    {
-        $this->em = $em;
-    }
 
     /**
      * Flush index table
@@ -205,5 +197,10 @@ class IndexManager
     {
         $this->config = $config;
         return $this;
+    }
+
+    public function setEm(EntityManagerInterface $em)
+    {
+        $this->em = $em;
     }
 }
